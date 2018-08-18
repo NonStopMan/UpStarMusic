@@ -6,4 +6,8 @@ const Artist = require('../models/artist');
  * @return {promise} A promise that resolves after the update
  */
 module.exports = (_ids) => {
+    //const bulk = Artist.initializeUnorderedBulkOp();
+    return Artist
+        .find({ _id: { $in: _ids } })
+        .update({ _id: { $in: _ids } }, { retired: true }, { multi: true });
 };
